@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="post_card" type="id" />
+    <item name="fab_add_post" type="id" />
+    <item name="rate_button" type="id" />
+    <item name="post_button" type="id" />
+    <item name="post_input_layout" type="id" />
+</resources>

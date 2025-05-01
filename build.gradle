@@ -1,11 +1,15 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
+    ext.kotlin_version = '1.6.10'  // Define the Kotlin version
+
     repositories {
         google()
         mavenCentral()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:7.0.2"
+        classpath 'com.android.tools.build:gradle:7.2.0'  // Update to the latest AGP version
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"  // Add Kotlin Gradle plugin
+        classpath 'com.google.gms:google-services:4.3.15'// Add Google Services plugin with apply false
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

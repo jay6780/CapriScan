@@ -1,10 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF9900</color>
-    <color name="purple_700">#E88000</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="green_500">#24EE00</color>
+    <color name="green_700">#4CAF50</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="red">#FF0000</color>
+    <color name="dark_red">#8B0000</color>
+    <color name="dark_green">#006400</color>
+    <color name="accent_color">#FFA500</color>
+    <color name="green">#FF00FF00</color>
+    <color name="blue">#FF0000FF</color>
+    <color name="yellow">#FFFFFF00</color>
+    <color name="gray">#FF808080</color>
+    <color name="orange">#FFFFA500</color>
+    <color name="pink">#FFFFC0CB</color>
+    <color name="cyan">#FF00FFFF</color>
+    <color name="magenta">#FFFF00FF</color>
+    <color name="primaryRed">#b60708</color>
+    <color name="soft_red">#FFB3B3</color>
+    <color name="new_red">#b60708</color>
+
+    <color name="primary">#6200EE</color>
+    <color name="primary_variant">#3700B3</color>
+    <color name="secondary">#03DAC6</color>
+    <color name="secondary_variant">#018786</color>
+    <color name="background">#FFFFFF</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="error">#B00020</color>
+    <color name="on_primary">#FFFFFF</color>
+    <color name="on_secondary">#000000</color>
+    <color name="on_background">#000000</color>
+    <color name="on_surface">#000000</color>
+    <color name="on_error">#FFFFFF</color>
+
+    <color name="my_primary">#FF5964</color>
+
+    <color name="light_gray">#E0E0E0</color>
+    <color name="gray_100">#F5F5F5</color>
+    <color name="gray_200">#EEEEEE</color>
+    <color name="gray_300">#E0E0E0</color>
+    <color name="gray_400">#BDBDBD</color>
+    <color name="gray_500">#9E9E9E</color>
+    <color name="gray_600">#757575</color>
+    <color name="gray_700">#616161</color>
+    <color name="gray_800">#424242</color>
+    <color name="gray_900">#212121</color>
+    <color name="apple_green">#8DB600</color>
+    <color name="colorPrimary">#4CAF50</color>
+    <color name="blue_light">#6495ED</color>
+    <color name="dark_gray">#444444</color>
+    <color name="light_blue">#E7F0FE</color>
+    <color name="reaction_bg">#F0F2F5</color>
+    <color name="comment_bg">#F2F3F5</color>
 </resources>

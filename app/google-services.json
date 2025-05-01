@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "632484715826",
+    "project_id": "capri-scan-4a5ea",
+    "storage_bucket": "capri-scan-4a5ea.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:632484715826:android:ecaaec93856c0a2ba04b2b",
+        "android_client_info": {
+          "package_name": "app.example.capriscan"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcIWWrbefRQmJWhH4wlakBOz1K96nOkJs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

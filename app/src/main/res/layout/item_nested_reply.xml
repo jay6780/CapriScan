@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp">
+
+    <!-- Indentation view with vertical line -->
+    <View
+        android:id="@+id/reply_indentation"
+        android:layout_width="16dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/vertical_line_background" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/nested_reply_user_avatar"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/default_avatar"
+                app:civ_border_color="#FFFFFF"
+                app:civ_border_width="1dp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/nested_reply_user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="User Name"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/nested_reply_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="Reply content"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/nested_reply_timestamp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1h"
+                        android:textColor="@color/dark_gray"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/nested_reply_reply_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:text="Reply"
+                        android:textColor="@color/blue"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <!-- Toggle button for nested replies -->
+                <TextView
+                    android:id="@+id/toggle_nested_replies_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="View replies"
+                    android:textColor="@color/dark_gray"
+                    android:textSize="12sp"
+                    android:visibility="gone" />
+
+                <!-- Container for nested reply input -->
+                <LinearLayout
+                    android:id="@+id/nested_reply_input_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/nested_reply_current_user_avatar"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/default_avatar"
+                        app:civ_border_color="#FFFFFF"
+                        app:civ_border_width="1dp" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <EditText
+                            android:id="@+id/nested_reply_edit_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:background="@drawable/edit_text_background"
+                            android:hint="Write a reply..."
+                            android:inputType="textMultiLine"
+                            android:maxLines="5"
+                            android:minHeight="36dp"
+                            android:padding="8dp"
+                            android:textSize="14sp" />
+
+                        <Button
+                            android:id="@+id/send_nested_reply_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="36dp"
+                            android:layout_gravity="end"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@color/blue"
+                            android:text="SEND"
+                            android:textColor="@android:color/white"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Container for deeper nested replies -->
+                <LinearLayout
+                    android:id="@+id/nested_reply_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:orientation="vertical"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/nested_reply_menu_button"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Menu"
+                android:src="@drawable/ic_more_vert" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

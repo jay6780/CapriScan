@@ -1,3 +1,61 @@
 <resources>
-    <string name="app_name">ML with TensorFlowLite</string>
+    <string name="app_name">CapriScan</string>
+
+    <string name="google_maps_key">AIzaSyCYiY9udkWsjp1eO7MFNx22UP5ASdpkW3A</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    
+    <!-- Community Page Strings -->
+    <string name="community_page_error">Cannot load Community page. Please try again later.</string>
+    <string name="error_loading_posts">Error loading posts</string>
+    <string name="emoji_feature_unavailable">Emoji feature temporarily unavailable</string>
+    <string name="tagging_coming_soon">Tagging functionality coming soon</string>
+    <string name="post_cannot_be_empty">Post cannot be empty</string>
+    <string name="uploading">Uploading…</string>
+    <string name="post">Post</string>
+    <string name="failed_to_upload_image">Failed to upload image</string>
+    <string name="please_login_to_post">Please log in to post</string>
+    <string name="post_added_successfully">Post added successfully</string>
+    <string name="error_adding_post">Error adding post</string>
+    <string name="post_deleted_successfully">Post deleted successfully</string>
+    <string name="error_deleting_post">Error deleting post</string>
+    <string name="please_login_to_reply">Please log in to reply</string>
+    <string name="reply_added_successfully">Reply added successfully</string>
+    <string name="error_adding_reply">Error adding reply: %s</string>
+    <string name="error_fetching_user_data">Error fetching user data: %s</string>
+    
+    <!-- Post Creation Dialog Strings -->
+    <string name="create_post">Create Post</string>
+    <string name="your_name">Your Name</string>
+    <string name="whats_on_your_mind">What\'s on your mind?</string>
+    <string name="selected_image_preview">Selected image for post</string>
+    <string name="remove_image">Remove image</string>
+    <string name="add_to_your_post">Add to your post</string>
+    <string name="add_photo">Add Photo</string>
+    <string name="add_location">Add Location</string>
+    
+    <!-- Create Story Dialog Strings -->
+    <string name="create_story">Create Story</string>
+    <string name="take_photo">Take Photo</string>
+    <string name="photo_from_gallery">Photo from Gallery</string>
+    <string name="text_story">Text Story</string>
+    <string name="camera_icon">Camera icon</string>
+    <string name="gallery_icon">Gallery icon</string>
+    <string name="text_icon">Text icon</string>
+    
+    <!-- Post Item Strings -->
+    <string name="reply">Reply</string>
+    <string name="delete">Delete</string>
+    <string name="write_a_reply">Write a reply…</string>
+
+    <!-- Admin Dashboard Strings -->
+    <string name="admin_dashboard">Admin Dashboard</string>
+    <string name="app_logo_description">Application logo</string>
+    <string name="announcements_list_description">List of announcements</string>
+    <string name="add_announcement_description">Add new announcement</string>
+    <string name="please_login_to_rate">rate</string>
+    <string name="show_posts">Show All Posts</string>
+    <string name="hide_posts">Hide Posts</string>
+    <string name="search_posts_hint">Search posts</string>
+
 </resources>

@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="Gradle: com.google.firebase:firebase-storage:21.0.1@aar">
+    <ANNOTATIONS>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/4bf905c1f71cff0baf6cec6b397065b7/transformed/jetified-firebase-storage-21.0.1/annotations.zip!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/4bf905c1f71cff0baf6cec6b397065b7/transformed/jetified-firebase-storage-21.0.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/4bf905c1f71cff0baf6cec6b397065b7/transformed/jetified-firebase-storage-21.0.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/4bf905c1f71cff0baf6cec6b397065b7/transformed/jetified-firebase-storage-21.0.1/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.firebase/firebase-storage/21.0.1/c51a5e3e4935e5c2c65851d522968e573f0ac40c/firebase-storage-21.0.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

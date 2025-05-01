@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="0dp"
+    app:cardElevation="1dp"
+    android:backgroundTint="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Post header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp">
+
+            <!-- User avatar -->
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/post_user_avatar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/default_avatar"
+                app:civ_border_width="1dp"
+                app:civ_border_color="@color/light_gray" />
+
+            <!-- User info and timestamp -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+        android:orientation="vertical"
+                android:layout_marginStart="8dp">
+
+                <!-- Username -->
+        <TextView
+            android:id="@+id/post_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+                    android:textSize="16sp"
+            android:textStyle="bold"
+                    android:textColor="@color/black"
+                    tools:text="User Name" />
+
+                <!-- Time and visibility -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="2dp">
+
+                    <!-- Timestamp -->
+                    <TextView
+                        android:id="@+id/post_timestamp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:textColor="@color/dark_gray"
+                        tools:text="2 hours ago" />
+                    
+                    <!-- Separator dot -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" · "
+                        android:textSize="12sp"
+                        android:textColor="@color/dark_gray" />
+                    
+                    <!-- Visibility icon -->
+                    <ImageView
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/ic_public"
+                        app:tint="@color/dark_gray" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- More options button -->
+            <ImageButton
+                android:id="@+id/post_more_button"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_more_vert"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="More options" />
+        </LinearLayout>
+
+        <!-- Post content -->
+        <TextView
+            android:id="@+id/post_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="12dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            tools:text="This is the content of the post that might span multiple lines and contain various information about what the user wants to share with their community." />
+
+        <!-- Post image (initially gone) -->
+        <ImageView
+            android:id="@+id/post_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:contentDescription="Post image"
+            android:visibility="gone"
+            tools:visibility="visible"
+            tools:src="@drawable/bg2" />
+
+        <!-- Reactions count -->
+        <LinearLayout
+            android:id="@+id/reactions_count_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
+
+
+
+            <!-- Total reactions count -->
+            <TextView
+                android:id="@+id/reactions_count"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="4dp"
+                android:textSize="14sp"
+                android:textColor="@color/dark_gray"
+                tools:text="15" />
+
+            <!-- Comments and shares count -->
+            <TextView
+                android:id="@+id/comments_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/dark_gray"
+                tools:text="5 comments" />
+        </LinearLayout>
+
+        <!-- Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/light_gray"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp" />
+
+
+        <!-- Comments section preview (expandable) -->
+        <LinearLayout
+            android:id="@+id/comments_preview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <!-- Top comment preview -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/default_avatar"
+                    app:civ_border_width="1dp"
+                    app:civ_border_color="@color/light_gray" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/comment_bubble_background"
+                    android:padding="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="User Name"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:text="This is a comment on the post that might provide additional context or thoughts." />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Comment input field -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/current_user_comment_avatar"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/default_avatar"
+                    app:civ_border_width="1dp"
+                    app:civ_border_color="@color/light_gray" />
+
+                <EditText
+                    android:id="@+id/comment_input"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/comment_input_background"
+                    android:hint="Write a comment..."
+            android:inputType="textMultiLine"
+            android:maxLines="3"
+                    android:padding="8dp"
+                    android:textSize="14sp" />
+
+                <ImageButton
+                    android:id="@+id/comment_send_button"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/circle_button_background"
+                    android:src="@drawable/ic_send"
+                    android:contentDescription="Send comment" />
+            </LinearLayout>
+
+            <!-- View all comments button -->
+            <TextView
+                android:id="@+id/view_all_comments_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="View all 5 comments"
+                android:textColor="@color/dark_gray"
+                android:textSize="14sp"
+            android:padding="8dp"
+                android:gravity="center"
+                android:layout_marginTop="8dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true" />
+        </LinearLayout>
+
+        <!-- Reply section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+
+                <Button
+                    android:id="@+id/post_reply_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/reply"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/blue"
+                    android:layout_marginEnd="8dp"/>
+
+                <Button
+                    android:id="@+id/post_delete_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/delete"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/red"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/post_reply_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/write_a_reply"
+                android:background="@drawable/rounded_edit_text_background"
+                android:padding="12dp"
+                android:minHeight="48dp"
+                android:layout_marginBottom="8dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/post_replies_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"/>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
