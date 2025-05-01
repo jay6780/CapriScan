@@ -32,6 +32,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
@@ -53,7 +54,7 @@ public class CommunityPage extends Fragment {
     private static final String TAG = "CommunityPage";
     private View view;
     private EditText postEditText;
-    private Button postButton;
+    private Button postButton,own;
     private FloatingActionButton fabAddPost;
     private RecyclerView postsRecyclerView;
     private PostAdapter postAdapter;
@@ -68,6 +69,7 @@ public class CommunityPage extends Fragment {
     private boolean arePostsVisible = true; // Track post visibility state
 
     private SearchView searchView; // Added SearchView
+    private boolean isMypost = false;
 
     @Nullable
     @Override
@@ -117,7 +119,7 @@ public class CommunityPage extends Fragment {
      */
     private void initializeViews() {
         if (view == null) return;
-
+        own = view.findViewById(R.id.own);
         postEditText = view.findViewById(R.id.post_edit_text);
         postButton = view.findViewById(R.id.post_button);
         fabAddPost = view.findViewById(R.id.fab_add_post);
@@ -127,11 +129,20 @@ public class CommunityPage extends Fragment {
         currentUserProfilePicture = view.findViewById(R.id.current_user_profile_picture);
         showAllButton = view.findViewById(R.id.showall);
         searchView = view.findViewById(R.id.search_view);
+        own.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isMypost = true;
+                loadPosts();
+                arePostsVisible = !arePostsVisible;
+            }
+        });
     }
 
     /**
      * Setup all UI components and their listeners
      */
+
     private void setupUIComponents() {
         if (view == null) return;
 
@@ -202,7 +213,7 @@ public class CommunityPage extends Fragment {
         if (swipeRefreshLayout != null) {
             swipeRefreshLayout.setRefreshing(true);
         }
-
+        String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         db.collection("posts")
                 .orderBy("timestamp", Query.Direction.DESCENDING)
                 .get()
@@ -211,8 +222,15 @@ public class CommunityPage extends Fragment {
                     for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                         Post post = documentSnapshot.toObject(Post.class);
                         if (post != null && post.getContent() != null && post.getContent().toLowerCase().contains(query.toLowerCase())) {
-                            post.setId(documentSnapshot.getId());
-                            filteredPosts.add(post);
+                            if (isMypost) {
+                                if (post.getUserId().equals(currentUserId)) {
+                                    post.setId(documentSnapshot.getId());
+                                    filteredPosts.add(post);
+                                }
+                            } else {
+                                post.setId(documentSnapshot.getId());
+                                filteredPosts.add(post);
+                            }
                         }
                     }
                     if (postAdapter != null) {
@@ -236,12 +254,13 @@ public class CommunityPage extends Fragment {
 
     private void togglePostVisibility() {
         arePostsVisible = !arePostsVisible; // Toggle the state
-
+        isMypost = false;
         if (postsRecyclerView != null) {
             postsRecyclerView.setVisibility(arePostsVisible ? View.VISIBLE : View.GONE);
         }
 
         if (showAllButton != null) {
+            loadPosts();
             showAllButton.setText(arePostsVisible ? R.string.hide_posts : R.string.show_posts);
         }
     }
@@ -389,83 +408,75 @@ public class CommunityPage extends Fragment {
 
     private void loadPosts() {
         try {
-            // Show loading indicator
-            if (swipeRefreshLayout != null) {
-                swipeRefreshLayout.setRefreshing(true);
-            }
+            setRefreshing(true);
+            String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            Query query = db.collection("posts")
+                    .orderBy("timestamp", Query.Direction.DESCENDING);
 
-            if (db == null) {
-                db = FirebaseFirestore.getInstance();
-            }
+            query.get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    if (isMypost) {
+                        processMyOwn(task.getResult(),userId);
+                    } else {
+                        processPosts(task.getResult());
+                    }
+                } else {
+                    handleError(task.getException());
+                }
+                setRefreshing(false);
+            });
 
-            db.collection("posts")
-                    .orderBy("timestamp", Query.Direction.DESCENDING)
-                    .get()
-                    .addOnSuccessListener(queryDocumentSnapshots -> {
-                        try {
-                            if (getContext() == null || getActivity() == null || isDetached()) {
-                                return; // Fragment is no longer active
-                            }
-
-                            // Clear existing posts
-                            postAdapter.updatePosts(new ArrayList<>());
-
-                            // Process results
-                            for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                                Post post = documentSnapshot.toObject(Post.class);
-                                if (post != null) {
-                                    post.setId(documentSnapshot.getId());
-                                    postAdapter.addPost(post);
-
-                                    // Load replies for this post
-                                    loadRepliesForPost(post);
-                                }
-                            }
-
-                            // Hide loading indicator
-                            if (swipeRefreshLayout != null) {
-                                swipeRefreshLayout.setRefreshing(false);
-                            }
-
-                            // Fetch usernames for all posts
-                            for (Post post : postAdapter.getPosts()) {
-                                fetchUserName(post);
-                            }
-                        } catch (Exception e) {
-                            Log.e(TAG, "Error processing posts", e);
-                            if (getContext() != null) {
-                                Toast.makeText(getContext(), "Error loading posts", Toast.LENGTH_SHORT).show();
-                            }
-
-                            // Hide loading indicator
-                            if (swipeRefreshLayout != null) {
-                                swipeRefreshLayout.setRefreshing(false);
-                            }
-                        }
-                    })
-                    .addOnFailureListener(e -> {
-                        Log.e(TAG, "Error loading posts", e);
-                        if (getContext() != null) {
-                            Toast.makeText(getContext(), "Failed to load posts: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-
-                        // Hide loading indicator
-                        if (swipeRefreshLayout != null) {
-                            swipeRefreshLayout.setRefreshing(false);
-                        }
-                    });
         } catch (Exception e) {
-            Log.e(TAG, "Error in loadPosts()", e);
-            if (getContext() != null) {
-                Toast.makeText(getContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-
-            // Hide loading indicator
-            if (swipeRefreshLayout != null) {
-                swipeRefreshLayout.setRefreshing(false);
-            }
+            handleError(e);
+            setRefreshing(false);
         }
     }
+
+    private void processPosts(QuerySnapshot snapshot) {
+        List<Post> posts = new ArrayList<>();
+        for (QueryDocumentSnapshot doc : snapshot) {
+            Post post = doc.toObject(Post.class);
+            post.setId(doc.getId());
+            posts.add(post);
+            loadRepliesForPost(post);
+        }
+        postAdapter.updatePosts(posts);
+
+        for (Post post : posts) {
+            fetchUserName(post);
+        }
+    }
+
+    private void processMyOwn(QuerySnapshot snapshot,String currentUserId) {
+        List<Post> userPosts = new ArrayList<>();
+        for (QueryDocumentSnapshot doc : snapshot) {
+            Post post = doc.toObject(Post.class);
+            if (post.getUserId().equals(currentUserId)) {
+                post.setId(doc.getId());
+                userPosts.add(post);
+                loadRepliesForPost(post);
+            }
+        }
+        postAdapter.updatePosts(userPosts);
+
+        for (Post post : userPosts) {
+            fetchUserName(post);
+        }
+    }
+
+    private void handleError(Exception e) {
+        Log.e(TAG, "Error loading posts", e);
+        if (getContext() != null) {
+            Toast.makeText(getContext(), "Error loading posts", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void setRefreshing(boolean refreshing) {
+        if (swipeRefreshLayout != null) {
+            swipeRefreshLayout.setRefreshing(refreshing);
+        }
+    }
+
 
     // Load replies for a specific post
     private void loadRepliesForPost(Post post) {

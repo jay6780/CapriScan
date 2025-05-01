@@ -5,14 +5,14 @@ plugins {
 }
 
 android {
-    compileSdk 33
+    compileSdk 34
 
     namespace "app.example.capriscan"
 
     defaultConfig {
         applicationId "app.example.capriscan"
         minSdk 23
-        targetSdk 33
+        targetSdk 28
         versionCode 1
         versionName "1.0"
 
